@@ -1,0 +1,12 @@
+name=gettext
+version=0.21
+source=http://ftp.gnu.org/gnu/gettext/gettext-0.21.tar.xz
+
+build() {
+    ./configure --disable-shared
+    make $MAKEOPTS
+}
+
+package() {
+    cp -v gettext-tools/src/{msgfmt,msgmerge,xgettext} /usr/bin
+}

@@ -1,0 +1,13 @@
+pkgname=gawk
+pkgver=5.1.0
+source=("http://ftp.gnu.org/gnu/gawk/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's/extras//' Makefile.in
+    ./configure --prefix=/usr   \
+                --host=$LFS_TGT \
+                --build=$(./config.guess)
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}

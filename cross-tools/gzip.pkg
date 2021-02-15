@@ -1,0 +1,11 @@
+pkgname=gzip
+pkgver=1.10
+source=("http://ftp.gnu.org/gnu/gzip/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --host=$LFS_TGT
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+    mv -v $LFS/usr/bin/gzip $LFS/bin
+}

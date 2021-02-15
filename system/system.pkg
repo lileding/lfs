@@ -1,0 +1,27 @@
+name=system
+version=10.0
+depends=man-pages iana-etc glibc zlib bzip2 xz zstd file readline m4 bc flex tcl expect dejagnu binutils gmp
+
+build() {
+    #pkg.sh /var/lib/lfs/repo/man-pages.pkg
+    pkg.sh /var/lib/lfs/repo/iana-etc.pkg
+    pkg.sh /var/lib/lfs/repo/glibc.pkg
+    pkg.sh /var/lib/lfs/repo/zlib.pkg
+    pkg.sh /var/lib/lfs/repo/bzip2.pkg
+    pkg.sh /var/lib/lfs/repo/xz.pkg
+    pkg.sh /var/lib/lfs/repo/zstd.pkg
+    pkg.sh /var/lib/lfs/repo/file.pkg
+    pkg.sh /var/lib/lfs/repo/readline.pkg
+    pkg.sh /var/lib/lfs/repo/m4.pkg
+    pkg.sh /var/lib/lfs/repo/bc.pkg
+    pkg.sh /var/lib/lfs/repo/flex.pkg
+    pkg.sh /var/lib/lfs/repo/tcl.pkg
+    pkg.sh /var/lib/lfs/repo/expect.pkg
+    pkg.sh /var/lib/lfs/repo/dejagnu.pkg
+    pkg.sh /var/lib/lfs/repo/binutils.pkg
+    pkg.sh /var/lib/lfs/repo/gmp.pkg
+}
+
+package() {
+    echo "Building Complete"
+}

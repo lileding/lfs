@@ -1,0 +1,10 @@
+pkgname=baselayout
+pkgver=10.0
+
+build() {
+    mkdir -pv $LFS/{bin,etc,lib,sbin,usr,var}
+    case $(uname -m) in
+          x86_64) mkdir -pv $LFS/lib64 ;;
+    esac
+    mkdir -pv $LFS/tools
+}

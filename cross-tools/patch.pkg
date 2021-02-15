@@ -1,0 +1,12 @@
+pkgname=patch
+pkgver=2.7.6
+source=("http://ftp.gnu.org/gnu/patch/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr   \
+                --host=$LFS_TGT \
+                --build=$(build-aux/config.guess)
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}

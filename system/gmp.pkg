@@ -1,0 +1,17 @@
+name=gmp
+version=6.2.1
+source=http://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz
+
+build() {
+    ./configure --prefix=/usr    \
+                --enable-cxx     \
+                --disable-static \
+                --docdir=/usr/share/doc/gmp-6.2.1
+    make $MAKEOPTS
+    make html
+}
+
+package() {
+    make install
+    make install-html
+}

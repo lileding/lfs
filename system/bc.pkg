@@ -1,0 +1,12 @@
+name=bc
+version=3.2.6
+source=https://github.com/gavinhoward/bc/releases/download/3.2.6/bc-3.2.6.tar.xz
+
+build() {
+    PREFIX=/usr CC=gcc ./configure.sh -G -O3
+    make $MAKEOPTS
+}
+
+package() {
+    make install
+}

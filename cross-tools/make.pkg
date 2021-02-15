@@ -1,0 +1,13 @@
+pkgname=make
+pkgver=4.3
+source=("http://ftp.gnu.org/gnu/make/${pkgname}-${pkgver}.tar.gz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr   \
+                --without-guile \
+                --host=$LFS_TGT \
+                --build=$(build-aux/config.guess)
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}

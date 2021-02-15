@@ -1,0 +1,13 @@
+pkgname=tar
+pkgver=1.33
+source=("http://ftp.gnu.org/gnu/tar/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr                     \
+                --host=$LFS_TGT                   \
+                --build=$(build-aux/config.guess) \
+                --bindir=/bin
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}

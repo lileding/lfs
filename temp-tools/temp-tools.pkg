@@ -1,0 +1,19 @@
+name=temp-tools
+version=10.0
+
+build() {
+    pkg.sh /var/lib/lfs/repo/baselayout.pkg
+    pkg.sh /var/lib/lfs/repo/libstdc++.pkg
+    pkg.sh /var/lib/lfs/repo/gettext.pkg
+    pkg.sh /var/lib/lfs/repo/bison.pkg
+    pkg.sh /var/lib/lfs/repo/perl.pkg
+    pkg.sh /var/lib/lfs/repo/python.pkg
+    pkg.sh /var/lib/lfs/repo/texinfo.pkg
+    pkg.sh /var/lib/lfs/repo/util-linux.pkg
+}
+
+package() {
+    find /usr/{lib,libexec} -name \*.la -delete
+    rm -rf /usr/share/{info,man,doc}/*
+    echo "Building Additional Temporary Tools Complete"
+}

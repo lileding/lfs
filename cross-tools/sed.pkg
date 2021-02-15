@@ -1,0 +1,12 @@
+pkgname=sed
+pkgver=4.8
+source=("http://ftp.gnu.org/gnu/sed/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr   \
+                --host=$LFS_TGT \
+                --bindir=/bin
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}

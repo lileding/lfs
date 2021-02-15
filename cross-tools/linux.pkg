@@ -1,0 +1,13 @@
+pkgname=linux
+pkgver=5.10.13
+source=("https://www.kernel.org/pub/linux/kernel/v5.x/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make mrproper
+    make headers
+    find usr/include -name '.*' -delete
+    rm usr/include/Makefile
+    mkdir -v $LFS/usr
+    cp -rv usr/include $LFS/usr
+}

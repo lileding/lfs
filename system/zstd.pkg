@@ -1,0 +1,14 @@
+name=zstd
+version=1.4.8
+source=https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
+
+build() {
+    make $MAKEOPTS
+}
+
+package() {
+    make prefix=/usr install
+    rm -v /usr/lib/libzstd.a
+    mv -v /usr/lib/libzstd.so.* /lib
+    ln -sfv ../../lib/$(readlink /usr/lib/libzstd.so) /usr/lib/libzstd.so
+}

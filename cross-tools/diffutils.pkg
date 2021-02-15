@@ -1,0 +1,10 @@
+pkgname=diffutils
+pkgver=3.7
+source=("http://ftp.gnu.org/gnu/diffutils/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --host=$LFS_TGT
+    make $MAKEOPTS
+    make DESTDIR=$LFS install
+}
