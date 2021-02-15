@@ -1,7 +1,25 @@
 pkgname=python
-pkgver=
-source=("")
+pkgver=3.9.1
+source=( \
+    "https://www.python.org/ftp/python/3.9.1/Python-${pkgver}.tar.xz" \
+    "https://www.python.org/ftp/python/doc/3.9.1/python-${pkgver}-docs-html.tar.bz2" \
+)
+noextract=("python-${pkgver}-docs-html.tar.bz2")
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/Python-${pkgver}"
+    ./configure --prefix=/usr       \
+                --enable-shared     \
+                --with-system-expat \
+                --with-system-ffi   \
+                --with-ensurepip=yes
+    make $MAKEOPTS
+    make install
+    install -v -dm755 /usr/share/doc/python-${pkgver}/html 
+
+    tar --strip-components=1  \
+        --no-same-owner       \
+        --no-same-permissions \
+        -C /usr/share/doc/python-${pkgver}/html \
+        -xvf ../python-${pkgver}-docs-html.tar.bz2
 }

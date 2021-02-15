@@ -1,7 +1,10 @@
 pkgname=libffi
-pkgver=
-source=("")
+pkgver=3.3
+source=("https://sourceware.org/pub/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --disable-static --with-gcc-arch=native
+    make $MAKEOPTS
+    make install
 }

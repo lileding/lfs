@@ -1,7 +1,0 @@
-pkgname=iproute
-pkgver=
-source=("")
-
-build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-}

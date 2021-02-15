@@ -1,6 +1,6 @@
 pkgname=system
 pkgver=10.0
-depends_complete=( \
+depends=( \
     man-pages \
     iana-etc \
     glibc \
@@ -33,12 +33,9 @@ depends_complete=( \
     bison \
     grep \
     bash \
-)
-depends=( \
     libtool \
-)
-depends_todo=( \
     gdbm \
+    gperf
     expat \
     inetutils \
     perl \
@@ -62,7 +59,7 @@ depends_todo=( \
     grub \
     less \
     gzip \
-    iproute \
+    iproute2 \
     kbd \
     libpipeline \
     make \
@@ -72,7 +69,7 @@ depends_todo=( \
     texinfo \
     vim \
     systemd \
-    d-bus \
+    dbus \
     procps-ng \
     util-linux \
     e2fsprogs \

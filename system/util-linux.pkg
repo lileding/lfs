@@ -1,7 +1,21 @@
 pkgname=util-linux
-pkgver=
-source=("")
+pkgver=2.36.2
+source=("https://www.kernel.org/pub/linux/utils/util-linux/v2.36/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
+              --docdir=/usr/share/doc/util-linux-${pkgver} \
+              --disable-chfn-chsh  \
+              --disable-login      \
+              --disable-nologin    \
+              --disable-su         \
+              --disable-setpriv    \
+              --disable-runuser    \
+              --disable-pylibmount \
+              --disable-static     \
+              --without-python     \
+              runstatedir=/run
+    make $MAKEOPTS
+    make install
 }

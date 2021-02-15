@@ -1,7 +1,15 @@
 pkgname=libelf
-pkgver=
-source=("")
+pkgver=0.183
+source=("https://sourceware.org/ftp/elfutils/${pkgver}/elfutils-${pkgver}.tar.bz2")
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/elfutils-${pkgver}"
+    ./configure --prefix=/usr                \
+                --disable-debuginfod         \
+                --enable-libdebuginfod=dummy \
+                --libdir=/lib
+    make $MAKEOPTS
+    make -C libelf install
+    install -vm644 config/libelf.pc /usr/lib/pkgconfig
+    rm /lib/libelf.a
 }

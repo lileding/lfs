@@ -1,7 +1,12 @@
 pkgname=intltool
-pkgver=
-source=("")
+pkgver=0.51.0
+source=("https://launchpad.net/intltool/trunk/${pkgver}/+download/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's:\\\${:\\\$\\{:' intltool-update.in
+    ./configure --prefix=/usr
+    make $MAKEOPTS
+    make install
+    install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-${pkgver}/I18N-HOWTO
 }

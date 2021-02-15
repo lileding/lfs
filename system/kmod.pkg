@@ -1,7 +1,20 @@
 pkgname=kmod
-pkgver=
-source=("")
+pkgver=28
+source=("https://www.kernel.org/pub/linux/utils/kernel/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr          \
+                --bindir=/bin          \
+                --sysconfdir=/etc      \
+                --with-rootlibdir=/lib \
+                --with-xz              \
+                --with-zstd            \
+                --with-zlib
+    make $MAKEOPTS
+    make install
+    for target in depmod insmod lsmod modinfo modprobe rmmod; do
+        ln -sfv ../bin/kmod /sbin/$target
+    done
+    ln -sfv kmod /bin/lsmod
 }

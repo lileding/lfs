@@ -1,7 +1,20 @@
 pkgname=inetutils
-pkgver=
-source=("")
+pkgver=2.0
+source=("http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr        \
+                --localstatedir=/var \
+                --disable-logger     \
+                --disable-whois      \
+                --disable-rcp        \
+                --disable-rexec      \
+                --disable-rlogin     \
+                --disable-rsh        \
+                --disable-servers
+    make $MAKEOPTS
+    make install
+    mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
+    mv -v /usr/bin/ifconfig /sbin
 }

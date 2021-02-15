@@ -1,7 +1,11 @@
 pkgname=automake
-pkgver=
-source=("")
+pkgver=1.16.3
+source=("http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i "s/''/etags/" t/tags-lisp-space.sh
+    ./configure --prefix=/usr --docdir=/usr/share/doc/automake-${pkgver}
+    make $MAKEOPTS
+    make install
 }

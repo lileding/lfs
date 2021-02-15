@@ -1,7 +1,10 @@
 pkgname=xml-parser
-pkgver=
-source=("")
+pkgver=2.46
+source=("https://cpan.metacpan.org/authors/id/T/TO/TODDR/XML-Parser-${pkgver}.tar.gz")
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/XML-Parser-${pkgver}"
+    perl Makefile.PL
+    make $MAKEOPTS
+    make install
 }

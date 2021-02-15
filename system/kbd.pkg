@@ -1,7 +1,19 @@
 pkgname=kbd
-pkgver=
-source=("")
+pkgver=2.4.0
+source=( \
+    "https://www.kernel.org/pub/linux/utils/${pkgname}/${pkgname}-${pkgver}.tar.xz" \
+    "http://www.linuxfromscratch.org/patches/lfs/development/${pkgname}-${pkgver}-backspace-1.patch" \
+)
+noextract=("${pkgname}-${pkgver}-backspace-1.patch")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    patch -Np1 -i ../${pkgname}-${pkgver}-backspace-1.patch
+    sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
+    sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+    ./configure --prefix=/usr --disable-vlock
+    make $MAKEOPTS
+    make install
+    mkdir -v            /usr/share/doc/kbd-${pkgver}
+    cp -R -v docs/doc/* /usr/share/doc/kbd-${pkgver}
 }

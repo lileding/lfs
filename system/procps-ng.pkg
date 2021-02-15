@@ -1,7 +1,18 @@
 pkgname=procps-ng
-pkgver=
-source=("")
+pkgver=3.3.17
+source=("https://sourceforge.net/projects/procps-ng/files/Production/${pkgname}-${pkgver}.tar.xz")
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/procps-${pkgver}"
+    ./configure --prefix=/usr                               \
+                --exec-prefix=                              \
+                --libdir=/usr/lib                           \
+                --docdir=/usr/share/doc/procps-ng-${pkgver} \
+                --disable-static                            \
+                --disable-kill                              \
+                --with-systemd
+    make $MAKEOPTS
+    make install
+    mv -v /usr/lib/libprocps.so.* /lib
+    ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
 }

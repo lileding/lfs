@@ -1,7 +1,10 @@
 pkgname=check
-pkgver=
-source=("")
+pkgver=0.15.2
+source=("https://github.com/libcheck/check/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --disable-static
+    make $MAKEOPTS
+    make docdir=/usr/share/doc/check-${pkgver} install
 }

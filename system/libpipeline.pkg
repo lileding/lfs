@@ -1,7 +1,10 @@
 pkgname=libpipeline
-pkgver=
-source=("")
+pkgver=1.5.3
+source=("http://download.savannah.gnu.org/releases/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr
+    make $MAKEOPTS
+    make install
 }

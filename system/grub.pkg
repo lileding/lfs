@@ -1,7 +1,15 @@
 pkgname=grub
-pkgver=
-source=("")
+pkgver=2.04
+source=("https://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr          \
+                --sbindir=/sbin        \
+                --sysconfdir=/etc      \
+                --disable-efiemu       \
+                --disable-werror
+    make $MAKEOPTS
+    make install
+    mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions
 }

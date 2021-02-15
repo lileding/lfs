@@ -1,7 +1,10 @@
 pkgname=less
-pkgver=
-source=("")
+pkgver=563
+source=("http://www.greenwoodsoftware.com/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --sysconfdir=/etc
+    make $MAKEOPTS
+    make install
 }

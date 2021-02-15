@@ -1,7 +1,10 @@
 pkgname=meson
-pkgver=
-source=("")
+pkgver=0.56.2
+source=("https://github.com/mesonbuild/${pkgname}/releases/download/${pkgver}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    python3 setup.py build
+    python3 setup.py install --root=dest
+    cp -rv dest/* /
 }

@@ -1,7 +1,12 @@
 pkgname=findutils
-pkgver=
-source=("")
+pkgver=4.8.0
+source=("http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr --localstatedir=/var/lib/locate
+    make $MAKEOPTS
+    make install
+    mv -v /usr/bin/find /bin
+    sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb
 }

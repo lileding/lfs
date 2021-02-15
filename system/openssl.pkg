@@ -1,7 +1,17 @@
 pkgname=openssl
-pkgver=
-source=("")
+pkgver=1.1.1i
+source=("https://www.openssl.org/source/${pkgname}-${pkgver}.tar.gz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./config --prefix=/usr         \
+             --openssldir=/etc/ssl \
+             --libdir=lib          \
+             shared                \
+             zlib-dynamic
+    make $MAKEOPTS
+    sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+    make MANSUFFIX=ssl install
+    mv -v /usr/share/doc/openssl /usr/share/doc/openssl-${pkgver}
+    cp -vfr doc/* /usr/share/doc/openssl-${pkgver}
 }

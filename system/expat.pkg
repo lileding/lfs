@@ -1,7 +1,13 @@
 pkgname=expat
-pkgver=
-source=("")
+pkgver=2.2.10
+source=("https://prdownloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr    \
+                --disable-static \
+                --docdir=/usr/share/doc/expat-${pkgver}
+    make $MAKEOPTS
+    make install
+    install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-${pkgver}
 }
