@@ -1,0 +1,13 @@
+pkgname=pkg-config
+pkgver=0.29.2
+source=("https://pkg-config.freedesktop.org/releases/${pkgname}-${pkgver}.tar.gz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr              \
+                --with-internal-glib       \
+                --disable-host-tool        \
+                --docdir=/usr/share/doc/pkg-config-${pkgver}
+    make $MAKEOPTS
+    make install
+}

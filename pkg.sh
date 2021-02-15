@@ -7,11 +7,19 @@ umask 022
 source $PKG
 
 DISTDIR=${DISTDIR:-/var/lib/lfs/distfiles}
-WORKDIR=${WORKDIR:-/var/lib/lfs/packages}
+PACKDIR=${PACKDIR:-/var/lib/lfs/packages}
+WORKDIR=${WORKDIR:-$PACKDIR}
 
 basedir="${WORKDIR}/${pkgname}-${pkgver}"
 srcdir="${basedir}/src"
 pkgdir="${basedir}/pkg"
+
+do_depends() {
+    echo "Solve depends of $pkgname-$pkgver"
+    for dep in ${depends[@]}; do
+        pkg.sh "${PACKDIR}/${dep}.pkg"
+    done
+}
 
 do_prepare() {
     echo "Prepare $pkgname-$pkgver"
@@ -36,6 +44,7 @@ do_build() {
     ( build )
 }
 
+do_depends
 do_prepare
 do_build
 do_clean

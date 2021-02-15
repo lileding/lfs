@@ -1,0 +1,7 @@
+pkgname=less
+pkgver=
+source=("")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+}

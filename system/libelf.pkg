@@ -1,0 +1,7 @@
+pkgname=libelf
+pkgver=
+source=("")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+}

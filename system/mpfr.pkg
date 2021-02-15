@@ -1,0 +1,15 @@
+pkgname=mpfr
+pkgver=4.1.0
+source=("http://www.mpfr.org/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr        \
+                --disable-static     \
+                --enable-thread-safe \
+                --docdir=/usr/share/doc/mpfr-${pkgver}
+    make $MAKEOPTS
+    make html $MAKEOPTS
+    make install
+    make install-html
+}

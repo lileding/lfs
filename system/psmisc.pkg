@@ -1,0 +1,12 @@
+pkgname=psmisc
+pkgver=23.3
+source=("https://sourceforge.net/projects/${pkgname}/files/${pkgname}/${pkgname}-${pkgver}.tar.xz")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=/usr
+    make $MAKEOPTS
+    make install
+    mv -v /usr/bin/fuser   /bin
+    mv -v /usr/bin/killall /bin
+}

@@ -1,23 +1,79 @@
 pkgname=system
 pkgver=10.0
-depends=(man-pages iana-etc glibc zlib bzip2 xz zstd file readline m4 bc flex tcl expect dejagnu binutils gmp)
-
-build() {
-    #pkg.sh /var/lib/lfs/packages/man-pages.pkg
-    #pkg.sh /var/lib/lfs/packages/iana-etc.pkg
-    #pkg.sh /var/lib/lfs/packages/glibc.pkg
-    pkg.sh /var/lib/lfs/packages/zlib.pkg
-    pkg.sh /var/lib/lfs/packages/bzip2.pkg
-    pkg.sh /var/lib/lfs/packages/xz.pkg
-    pkg.sh /var/lib/lfs/packages/zstd.pkg
-    pkg.sh /var/lib/lfs/packages/file.pkg
-    pkg.sh /var/lib/lfs/packages/readline.pkg
-    pkg.sh /var/lib/lfs/packages/m4.pkg
-    pkg.sh /var/lib/lfs/packages/bc.pkg
-    pkg.sh /var/lib/lfs/packages/flex.pkg
-    pkg.sh /var/lib/lfs/packages/tcl.pkg
-    pkg.sh /var/lib/lfs/packages/expect.pkg
-    pkg.sh /var/lib/lfs/packages/dejagnu.pkg
-    pkg.sh /var/lib/lfs/packages/binutils.pkg
-    pkg.sh /var/lib/lfs/packages/gmp.pkg
-}
+depends_complete=( \
+    man-pages \
+    iana-etc \
+    glibc \
+    zlib \
+    bzip2 \
+    xz \
+    zstd \
+    file \
+    readline \
+    m4 \
+    bc \
+    flex \
+    tcl \
+    expect \
+    dejagnu \
+    binutils \
+    gmp \
+    mpfr \
+    mpc \
+    attr \
+    acl \
+    libcap \
+    shadow \
+    gcc \
+    pkg-config \
+    ncurses \
+    sed \
+    psmisc \
+    gettext \
+    bison \
+    grep \
+    bash \
+)
+depends=( \
+    libtool \
+)
+depends_todo=( \
+    gdbm \
+    expat \
+    inetutils \
+    perl \
+    xml-parser \
+    intltool \
+    autoconf \
+    automake \
+    kmod \
+    libelf \
+    libffi \
+    openssl \
+    python \
+    ninja \
+    meson \
+    coreutils \
+    check \
+    diffutils \
+    gawk \
+    findutils \
+    groff \
+    grub \
+    less \
+    gzip \
+    iproute \
+    kbd \
+    libpipeline \
+    make \
+    patch \
+    man-db \
+    tar \
+    texinfo \
+    vim \
+    systemd \
+    d-bus \
+    procps-ng \
+    util-linux \
+    e2fsprogs \
+)

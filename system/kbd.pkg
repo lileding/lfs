@@ -1,0 +1,7 @@
+pkgname=kbd
+pkgver=
+source=("")
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+}
