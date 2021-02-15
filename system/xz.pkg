@@ -1,15 +1,13 @@
-name=xz
-version=5.2.5
-source=https://tukaani.org/xz/xz-5.2.5.tar.xz
+pkgname=xz
+pkgver=5.2.5
+source=("https://tukaani.org/xz/${pkgname}-${pkgver}.tar.xz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure --prefix=/usr    \
                 --disable-static \
-                --docdir=/usr/share/doc/xz-5.2.5
+                --docdir=/usr/share/doc/xz-${pkgver}
     make $MAKEOPTS
-}
-
-package() {
     make install
     mv -v   /usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} /bin
     mv -v /usr/lib/liblzma.so.* /lib

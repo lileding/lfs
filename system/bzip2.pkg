@@ -1,17 +1,19 @@
-name=bzip2
-version=1.0.8
-source=https://www.sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
-patches=bzip2-1.0.8-install_docs-1.patch
+pkgname=bzip2
+pkgver=1.0.8
+source=( \
+    "https://www.sourceware.org/pub/bzip2/${pkgname}-${pkgver}.tar.gz" \
+    "http://www.linuxfromscratch.org/patches/lfs/development/${pkgname}-${pkgver}-install_docs-1.patch" \
+)
+noextract=("${pkgname}-${pkgver}-install_docs-1.patch")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    patch -Np1 -i ../${pkgname}-${pkgver}-install_docs-1.patch
     sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
     sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
     make -f Makefile-libbz2_so
     make clean
     make $MAKEOPTS
-}
-
-package() {
     make PREFIX=/usr install
     cp -v bzip2-shared /bin/bzip2
     cp -av libbz2.so* /lib

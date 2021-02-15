@@ -1,15 +1,13 @@
-name=dejagnu
-version=1.6.2
-source=http://ftp.gnu.org/gnu/dejagnu/dejagnu-1.6.2.tar.gz
+pkgname=dejagnu
+pkgver=1.6.2
+source=("http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure --prefix=/usr
     makeinfo --html --no-split -o doc/dejagnu.html doc/dejagnu.texi
     makeinfo --plaintext       -o doc/dejagnu.txt  doc/dejagnu.texi
-}
-
-package() {
     make install
-    install -v -dm755  /usr/share/doc/dejagnu-1.6.2
-    install -v -m644   doc/dejagnu.{html,txt} /usr/share/doc/dejagnu-1.6.2
+    install -v -dm755  /usr/share/doc/dejagnu-${pkgver}
+    install -v -m644   doc/dejagnu.{html,txt} /usr/share/doc/dejagnu-${pkgver}
 }

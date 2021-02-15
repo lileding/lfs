@@ -1,9 +1,14 @@
-name=tcl
-version=8.6.11
-source=https://downloads.sourceforge.net/tcl/tcl8.6.11-src.tar.gz
-aux_sources=https://downloads.sourceforge.net/tcl/tcl8.6.11-html.tar.gz
+pkgname=tcl
+pkgver=8.6.11
+source=( \
+    "https://downloads.sourceforge.net/${pkgname}/${pkgname}${pkgver}-src.tar.gz" \
+    "https://downloads.sourceforge.net/${pkgname}/${pkgname}${pkgver}-html.tar.gz" \
+)
+noextract=("${pkgname}${pkgver}-html.tar.gz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    tar -xf ../${pkgname}${pkgver}-html.tar.gz --strip-components=1
     SRCDIR=$(pwd)
     cd unix
     ./configure --prefix=/usr           \
@@ -27,9 +32,6 @@ build() {
                     -i pkgs/itcl4.2.1/itclConfig.sh
 
     unset SRCDIR
-}
-
-package() {
     make install
     chmod -v u+w /usr/lib/libtcl8.6.so
     make install-private-headers

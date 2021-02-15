@@ -1,5 +1,5 @@
-name=python
-version=3.9.1
+pkgname=python
+pkgver=3.9.1
 source=("https://www.python.org/ftp/python/3.9.1/Python-${pkgver}.tar.xz")
 
 build() {

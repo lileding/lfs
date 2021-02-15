@@ -1,8 +1,9 @@
-name=binutils
-version=2.36.1
-source=http://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz
+pkgname=binutils
+pkgver=2.36.1
+source=("http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     sed -i '/@\tincremental_copy/d' gold/testsuite/Makefile.in
     mkdir -v build
     cd       build
@@ -15,9 +16,6 @@ build() {
                  --enable-64-bit-bfd \
                  --with-system-zlib
     make tooldir=/usr $MAKEOPTS
-}
-
-package() {
     make tooldir=/usr install
     rm -fv /usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes}.a
 }

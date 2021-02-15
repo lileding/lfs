@@ -1,11 +1,8 @@
-name=iana-etc
-version=20210202
-source=https://github.com/Mic92/iana-etc/releases/download/20210202/iana-etc-20210202.tar.gz
+pkgname=iana-etc
+pkgver=20210202
+source=("https://github.com/Mic92/iana-etc/releases/download/20210202/${pkgname}-${pkgver}.tar.gz")
 
 build() {
-    echo "build complete"
-}
-
-package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     cp services protocols /etc
 }

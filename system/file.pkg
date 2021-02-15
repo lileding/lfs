@@ -1,12 +1,10 @@
-name=file
-version=5.39
-source=http://ftp.astron.com/pub/file/file-5.39.tar.gz
+pkgname=file
+pkgver=5.39
+source=("http://ftp.astron.com/pub/${pkgname}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure --prefix=/usr
     make $MAKEOPTS
-}
-
-package() {
     make install
 }

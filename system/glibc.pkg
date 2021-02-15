@@ -1,9 +1,16 @@
-name=glibc
-version=2.33
-source=http://ftp.gnu.org/gnu/glibc/glibc-2.33.tar.xz
-patches=glibc-2.33-fhs-1.patch
+pkgname=glibc
+pkgver=2.33
+source=( \
+    "http://ftp.gnu.org/gnu/glibc/${pkgname}-${pkgver}.tar.xz" \
+    'https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz' \
+    "http://www.linuxfromscratch.org/patches/lfs/development/${pkgname}-${pkgver}-fhs-1.patch" \
+)
+noextract=('tzdata2021a.tar.gz' "${pkgname}-${pkgver}-fhs-1.patch")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+
+    patch -Np1 -i ../${pkgname}-${pkgver}-fhs-1.patch
     mkdir -v build
     cd       build
     ../configure --prefix=/usr                            \
@@ -13,10 +20,6 @@ build() {
                  --with-headers=/usr/include              \
                  libc_cv_slibdir=/lib
     make $MAKEOPTS
-}
-
-package() {
-    cd build
     touch /etc/ld.so.conf
     sed '/test-installation/s@$(PERL)@echo not running@' -i ../Makefile
     make install
@@ -51,7 +54,7 @@ package() {
     localedef -i tr_TR -f UTF-8 tr_TR.UTF-8
     localedef -i zh_CN -f GB18030 zh_CN.GB18030
     localedef -i zh_HK -f BIG5-HKSCS zh_HK.BIG5-HKSCS
-    make localedata/install-locales
+    make localedata/install-locales ${MAKEOPTS}
     cat > /etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
 
@@ -69,6 +72,7 @@ rpc: files
 
 # End /etc/nsswitch.conf
 EOF
+
     tar -xf ../../tzdata2021a.tar.gz
 
     ZONEINFO=/usr/share/zoneinfo

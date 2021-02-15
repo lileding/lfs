@@ -1,12 +1,10 @@
-name=zstd
-version=1.4.8
-source=https://github.com/facebook/zstd/releases/download/v1.4.8/zstd-1.4.8.tar.gz
+pkgname=zstd
+pkgver=1.4.8
+source=("https://github.com/facebook/zstd/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.gz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make $MAKEOPTS
-}
-
-package() {
     make prefix=/usr install
     rm -v /usr/lib/libzstd.a
     mv -v /usr/lib/libzstd.so.* /lib
