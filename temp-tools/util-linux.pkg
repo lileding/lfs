@@ -1,8 +1,9 @@
-name=util-linux
-version=2.36.1
-source=https://www.kernel.org/pub/linux/utils/util-linux/v2.36/util-linux-2.36.1.tar.xz
+pkgname=util-linux
+pkgver=2.36.1
+source=("https://www.kernel.org/pub/linux/utils/util-linux/v2.36/${pkgname}-${pkgver}.tar.xz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     mkdir -pv /var/lib/hwclock
     ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime    \
                --docdir=/usr/share/doc/util-linux-2.36.1 \
@@ -17,8 +18,5 @@ build() {
                --without-python     \
                runstatedir=/run
     make $MAKEOPTS
-}
-
-package() {
     make install
 }

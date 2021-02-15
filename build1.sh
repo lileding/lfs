@@ -10,13 +10,13 @@ export PATH=$LFS/tools/bin:/usr/bin:/bin
 export DISTDIR=`realpath sources`
 export WORKDIR=/tmp
 
-#./pkg.sh cross-tools/baselayout.pkg
+./pkg.sh cross-tools/baselayout.pkg
 
-#./pkg.sh cross-tools/binutils.pkg
-#./pkg.sh cross-tools/gcc.pkg
-#./pkg.sh cross-tools/linux.pkg
-#./pkg.sh cross-tools/glibc.pkg
-#./pkg.sh cross-tools/libstdc++.pkg
+./pkg.sh cross-tools/binutils.pkg
+./pkg.sh cross-tools/gcc.pkg
+./pkg.sh cross-tools/linux.pkg
+./pkg.sh cross-tools/glibc.pkg
+./pkg.sh cross-tools/libstdc++.pkg
 
 ./pkg.sh cross-tools/m4.pkg
 ./pkg.sh cross-tools/ncurses.pkg

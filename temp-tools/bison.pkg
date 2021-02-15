@@ -1,13 +1,11 @@
-name=bison
-version=3.7.5
-source=http://ftp.gnu.org/gnu/bison/bison-3.7.5.tar.xz
+pkgname=bison
+pkgver=3.7.5
+source=("http://ftp.gnu.org/gnu/bison/${pkgname}-${pkgver}.tar.xz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure --prefix=/usr \
                 --docdir=/usr/share/doc/bison-3.7.5
     make $MAKEOPTS
-}
-
-package() {
     make install
 }

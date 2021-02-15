@@ -1,11 +1,7 @@
-name=baselayout
-version=10.0
+pkgname=baselayout
+pkgver=10.0
 
 build() {
-    echo "build complete"
-}
-
-package() {
     mkdir -pv /{boot,home,mnt,opt,srv}
     mkdir -pv /etc/{opt,sysconfig}
     mkdir -pv /lib/firmware

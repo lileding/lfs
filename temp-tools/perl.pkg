@@ -1,8 +1,9 @@
-name=perl
-version=5.32.1
-source=https://www.cpan.org/src/5.0/perl-5.32.1.tar.xz
+pkgname=perl
+pkgver=5.32.1
+source=("https://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.xz")
 
 build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
     sh Configure -des                                        \
                  -Dprefix=/usr                               \
                  -Dvendorprefix=/usr                         \
@@ -13,8 +14,5 @@ build() {
                  -Dvendorlib=/usr/lib/perl5/5.32/vendor_perl \
                  -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl
     make $MAKEOPTS
-}
-
-package() {
     make install
 }
