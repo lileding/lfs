@@ -1,5 +1,5 @@
 pkgname=util-linux
-pkgver=2.36.1
+pkgver=2.36.2
 source=("https://www.kernel.org/pub/linux/utils/util-linux/v2.36/${pkgname}-${pkgver}.tar.xz")
 
 build() {

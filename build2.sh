@@ -10,6 +10,7 @@ install -vm755 pkg.sh $LFS/usr/sbin
 mkdir -pv $LFS/build
 systemd-nspawn \
     --directory=$LFS \
+    --resolv-conf=off \
     --bind=`realpath ./sources`:/var/lib/lfs/distfiles \
     --bind=`realpath ./temp-tools`:/var/lib/lfs/packages \
     --setenv=HOME=/root \

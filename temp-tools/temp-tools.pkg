@@ -1,16 +1,17 @@
 pkgname=temp-tools
 pkgver=10.0
+depends=( \
+    baselayout \
+    libstdc++ \
+    gettext \
+    bison \
+    perl \
+    python \
+    texinfo \
+    util-linux \
+)
 
 build() {
-    pkg.sh /var/lib/lfs/packages/baselayout.pkg
-    pkg.sh /var/lib/lfs/packages/libstdc++.pkg
-    pkg.sh /var/lib/lfs/packages/gettext.pkg
-    pkg.sh /var/lib/lfs/packages/bison.pkg
-    pkg.sh /var/lib/lfs/packages/perl.pkg
-    pkg.sh /var/lib/lfs/packages/python.pkg
-    pkg.sh /var/lib/lfs/packages/texinfo.pkg
-    pkg.sh /var/lib/lfs/packages/util-linux.pkg
-
     find /usr/{lib,libexec} -name \*.la -delete
     rm -rf /usr/share/{info,man,doc}/*
 }
